@@ -1,10 +1,101 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : 2 Δεκ 2015, 1:45:42 μμ
-    Author     : zeusgrs
-*/
+body {
+    margin: 0px;
+}
 
+
+/* Menus */
+.mainMenu{
+    position:fixed;
+    width:200px;
+    height:200px;
+    margin:0px;
+    background-color: lightgray;
+}
+
+.mainMenu ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+.mainMenu li {
+    width: 200px;
+    height:35px;
+    color:white;
+    list-style-type: none;
+}
+
+.mainMenu .games {
+    width: 40px;
+    height:35px;
+    padding-top:10px;
+    padding-left:10px;
+    background-color: #444333;
+    float:left;
+}
+
+.mainMenu .tools {
+    width: 40px;
+    height:35px;
+    padding-top:10px;
+    padding-left:10px;
+    background-color: #59982b;
+    float:left;
+}
+
+.mainMenu .music {
+    width: 40px;
+    height:35px;
+    padding-top:10px;
+    padding-left:10px;
+    background-color: #cc3f3b;
+    float:left;
+}
+
+.mainMenu .photos {
+    width: 40px;
+    height:35px;
+    padding-top:10px;
+    padding-left:10px;
+    background-color: #e06b00;
+    float:left;
+}
+
+.mainMenu .internet {
+    width: 40px;
+    height:35px;
+    padding-top:10px;
+    padding-left:10px;
+    background-color: #039cd2;
+    float:left;
+}
+
+.mainMenu .mtitle {
+    position: relative;
+    width: 140px;
+    height:35px;
+    padding-top:10px;
+    padding-left:10px;
+    background-color: #777;
+    cursor: pointer;
+    float:left;
+}
+
+.mainMenu #games .mtitle:hover {
+    background-color: #444333;
+}
+
+.mainMenu #tools .mtitle:hover {
+    background-color: #59982b;
+}
+
+.mainMenu #music .mtitle:hover {
+    background-color: #cc3f3b;
+}
+
+.mainMenu #photos .mtitle:hover {
+    background-color: #e06b00;
+}
+
+.mainMenu #internet .mtitle:hover {
+    background-color: #039cd2;
+}
