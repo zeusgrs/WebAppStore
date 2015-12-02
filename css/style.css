@@ -24,49 +24,32 @@ body {
     list-style-type: none;
 }
 
-.mainMenu .games {
+.mainMenu .icon {
     width: 40px;
     height:35px;
     padding-top:10px;
     padding-left:10px;
+    float:left;    
+}
+
+.mainMenu .games {
     background-color: #444333;
-    float:left;
 }
 
 .mainMenu .tools {
-    width: 40px;
-    height:35px;
-    padding-top:10px;
-    padding-left:10px;
     background-color: #59982b;
-    float:left;
 }
 
 .mainMenu .music {
-    width: 40px;
-    height:35px;
-    padding-top:10px;
-    padding-left:10px;
     background-color: #cc3f3b;
-    float:left;
 }
 
 .mainMenu .photos {
-    width: 40px;
-    height:35px;
-    padding-top:10px;
-    padding-left:10px;
     background-color: #e06b00;
-    float:left;
 }
 
 .mainMenu .internet {
-    width: 40px;
-    height:35px;
-    padding-top:10px;
-    padding-left:10px;
     background-color: #039cd2;
-    float:left;
 }
 
 .mainMenu .mtitle {

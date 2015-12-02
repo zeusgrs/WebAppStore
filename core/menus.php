@@ -11,7 +11,6 @@ class Menus {
         $this->mainMenuItem("Music");
         $this->mainMenuItem("Photos");
         $this->mainMenuItem("Internet");
-        $this->mainMenuItem("Security4");
         echo "</ul>";
         echo "</div>";
     }
@@ -24,9 +23,13 @@ class Menus {
     function mainMenuItem($name,$url="#"){
         echo "<a href='$url'>
                 <li id='".strtolower($name)."'>
-                    <div class='".strtolower($name)."'>
-                        <img src='images/icons/icon_".strtolower($name).".png' width='25px'>
-                    </div>
+                    <div class='icon ".strtolower($name)."'>";
+        $image = "images/icons/icon_".strtolower($name).".png";
+        if(file_exists($image)){
+            echo "<img src='$image' width='25px'>";
+        }
+        
+        echo "      </div>
                     <div class='mtitle'>
                         $name
                     </div>
