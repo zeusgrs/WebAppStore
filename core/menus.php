@@ -11,7 +11,7 @@ class Menus {
         $this->mainMenuItem("Music");
         $this->mainMenuItem("Photos");
         $this->mainMenuItem("Internet");
-        $this->mainMenuItem("Security3");
+        $this->mainMenuItem("Security4");
         echo "</ul>";
         echo "</div>";
     }
