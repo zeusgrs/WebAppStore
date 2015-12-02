@@ -1,4 +1,7 @@
 <?php
+include_once 'core/pages.php';
+include_once 'core/databases.php';
+
 $HtmlPage = new HtmlPage();
 $Database = new Database();
 
@@ -12,7 +15,7 @@ $HtmlPage->HeadEnd();
 
 $HtmlPage->BodyStart();
 
-
+echo "Hello World";
 
 $HtmlPage->BodyEnd();
 
