@@ -1,6 +1,6 @@
 <?php
 $HtmlPage = new HtmlPage();
-$Databse = new Database();
+$Database = new Database();
 
-$Databse->Open($dbhost, $dbuser, $dbpass, $dbname);
+$Database->Open();
 

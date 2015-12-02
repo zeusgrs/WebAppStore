@@ -1,8 +1,9 @@
 <?php
 class Database {
     /**
-     * Open a database connection with 
-     * @param type $dbhost
+     * Open a database connection with parameters
+     * if start method with out parameter load parameter from config.php file
+     * @param type $dbhost 
      * @param type $dbuser
      * @param type $dbpass
      * @param type $dbname
