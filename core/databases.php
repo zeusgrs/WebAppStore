@@ -1,6 +1,14 @@
 <?php
-class database {
-    public function open($dbhost, $dbuser, $dbpass, $dbname){
+class Database {
+    /**
+     * Open a database connection with 
+     * @param type $dbhost
+     * @param type $dbuser
+     * @param type $dbpass
+     * @param type $dbname
+     * 
+     */
+    public function Open($dbhost, $dbuser, $dbpass, $dbname){
         
     if($dbhost == NULL){include 'config.php';}
     
@@ -11,20 +19,20 @@ class database {
     mysql_query("SET NAMES 'utf8' ");
     }
 
-    public function close() {
+    public function Close() {
         mysql_close();
     }
     
-    public function execQuery($query){
+    public function ExecQuery($query){
         return mysql_query($query);
     }
     
-    public function fetchRowQuery($query){
+    public function FetchRowQuery($query){
         $results = mysql_query($query);
         return mysql_fetch_row($results);
     }     
 
-    public function fetchRowQueryWithCellNames($query){
+    public function FetchRowQueryWithCellNames($query){
         $results = mysql_query($query);
         
         while ($row = mysql_fetch_assoc($results)) {
@@ -38,12 +46,12 @@ class database {
         return $dataArray;
     } 
     
-    public function numRowQuery($query){
+    public function NumRowQuery($query){
         $results = mysql_query($query);
         return mysql_num_row($results);
     }  
     
-    public function htmlTable($action,$table,$tableColumns,$edit){
+    public function HtmlTable($action,$table,$tableColumns,$edit){
         $query = mysql_query("SELECT * FROM $table");
         if($tableColumns == NULL){
             $colums = mysql_query("SHOW FIELDS FROM $table");
@@ -91,7 +99,7 @@ class database {
         return $table;
     }
 
-    public function editRowTable($idName,$idValue,$tableName){
+    public function EditRowTable($idName,$idValue,$tableName){
         $this->postDataTable($idName,$idValue,$tableName);
         $citys = new htmlForm();
                 
@@ -123,7 +131,7 @@ class database {
         return $form;
     }
     
-    public function postDataTable($idName,$idValue,$tableName){
+    public function PostDataTable($idName,$idValue,$tableName){
         if($idName != NULL && $idValue != NULL && $tableName != NULL){
             foreach ($_POST as $key => $value){
                 if($key == "send"){ } else {
@@ -135,7 +143,7 @@ class database {
         }
     }
     
-    function deleteRow($idName,$idValue,$tableName){
+    function DeleteRow($idName,$idValue,$tableName){
         if($idName != NULL && $idValue != NULL && $tableName != NULL){
             mysql_query("DELETE FROM $tableName WHERE $idName = '$idValue'");
             return "Η Εγγραφή διαγράφηκε";            

@@ -1,6 +1,6 @@
 <?php
-class userinfo {
-    public function getBrowser()
+class Userinfo {
+    public function GetBrowser()
     {
         $u_agent = $_SERVER['HTTP_USER_AGENT'];
         $bname = 'Unknown';
@@ -101,7 +101,7 @@ class userinfo {
     }
 
 
-    public function ipInfo($print,$code){
+    public function IpInfo($print,$code){
         global $ip,$host,$country,$browser,$os,$referer,$lang,$today;
         $ip = getenv("REMOTE_ADDR"); 
         $host = gethostbyaddr($ip);
@@ -124,7 +124,7 @@ class userinfo {
         }
     }
     
-    public function info(){
+    public function Info(){
         $ip = getenv("REMOTE_ADDR"); 
         $host = gethostbyaddr($ip);
         $httpinfo = $host."->".$_SERVER['HTTP_USER_AGENT'];
@@ -143,7 +143,7 @@ class userinfo {
                 "lang" => "$lang");        
     }
     
-    public function ip_info($ip = NULL, $purpose = "location", $deep_detect = TRUE) {
+    public function Ip_info($ip = NULL, $purpose = "location", $deep_detect = TRUE) {
             $output = NULL;
             if (filter_var($ip, FILTER_VALIDATE_IP) === FALSE) {
                 $ip = $_SERVER["REMOTE_ADDR"];

@@ -1,6 +1,6 @@
 <?php
-class htmlPage {
-    public function headStart($title) {
+class HtmlPage {
+    public function HeadStart($title) {
         echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">';
         echo "<html>\n";
         echo "<head>\n";
@@ -8,28 +8,28 @@ class htmlPage {
         echo "<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>\n";
     }
 
-    public function headEnd() {
+    public function HeadEnd() {
         echo "</head>\n";
     }
     
-    public function bodyStart() {
+    public function BodyStart() {
         echo "<body>\n";
     }
     
-    public function bodyEnd() {
+    public function BodyEnd() {
         echo "</body>\n";
         echo "</html>\n";
     }
     
-    public function stylesheet ($file) {
+    public function Stylesheet ($file) {
         echo "<link rel='stylesheet' type='text/css' href='$file'/>\n";
     }
 
-    public function javascript ($file) {
+    public function Javascript ($file) {
         echo "<script type='text/JavaScript' src='$file'></script>\n";
     }
     
-    public function jquery ($file=NULL) {
+    public function Jquery ($file=NULL) {
         if($file == NULL){
             echo "<script src='//code.jquery.com/jquery-1.11.0.min.js'></script>\n";
             echo "<script src='//code.jquery.com/jquery-migrate-1.2.1.min.js'></script>\n";        
@@ -39,33 +39,33 @@ class htmlPage {
         }
     }
     
-    public function jqueryMobile() {
+    public function JqueryMobile() {
             echo "<script src='//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js'></script>\n";
     }      
 
-    public function lightbox() {
+    public function Lightbox() {
         echo "<link rel='stylesheet' type='text/css' href='core/lightbox/css/lightbox.css'/>\n";
         echo "<script src='core/lightbox/js/lightbox.js'></script>\n";
     }
     
-    public function clearDivs() {
+    public function ClearDivs() {
         echo "<div class='clear'></div>\n";
     }
     
-    public function makeHtmlSpaces ($number) {
+    public function MakeHtmlSpaces ($number) {
         while($i < $number) {
             echo "&nbsp;";
             $i++;
         }
     }
     
-    public function reloadPage ($sec=0){
+    public function ReloadPage ($sec=0){
         $page = $_SERVER['PHP_SELF'];
         if($sec == NULL) { $sec = 0; }
         echo "<meta http-equiv='refresh' content='$sec'>";
     }
     
-    public function redirectPage ($url,$sec=0){
+    public function RedirectPage ($url,$sec=0){
         if($sec == NULL) { $sec = 0; }
         if($url == NULL) { $url = "#"; }
         echo "<script>    window.setTimeout(function(){
@@ -74,7 +74,7 @@ class htmlPage {
         //echo "<meta http-equiv='refresh' content='$sec;URL=$url'>";
     }
     
-    public function checkLoadTimeStartPoint (){
+    public function CheckLoadTimeStartPoint (){
         global $time,$start;
         $time = microtime();
         $time = explode(' ', $time);
@@ -82,7 +82,7 @@ class htmlPage {
         $start = $time;
     }
     
-    public function checkLoadTimeEndPoint (){
+    public function CheckLoadTimeEndPoint (){
         global $time,$start;
         $time = microtime();
         $time = explode(' ', $time);
