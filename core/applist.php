@@ -10,11 +10,11 @@ class AppList {
      */
     public function singleAppCard($name=null,$developer=null,$image=null,$stars=0,$link=null){
         echo "<div class='appListCard'>";
-        echo "<img src='$image'>";
-        echo "<div class='appName'>$name</div>";
+        echo "<a href='$link'><div class='thumbnail'><img src='$image'></div>";
+        echo "<div class='appName'>$name</div></a>";
         echo "<div class='devName'>$developer</div>";
-        echo "<div class='appStars app".$stars."Stars'></div>";
-        echo "<a href='$link'><div class='downloadIcon'></div></a>";
+        echo "<a href='$link'><div class='appStars app".$stars."Stars'></div>";
+        echo "<div class='downloadIcon'></div></a>";
         echo "</div>";        
     }
 }

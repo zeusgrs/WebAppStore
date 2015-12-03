@@ -3,6 +3,9 @@ body {
     background-color: lightgray;
 }
 
+a:link{
+    text-decoration: none;
+}
 
 /* Menus */
 .mainMenu{
@@ -102,6 +105,23 @@ body {
     padding: 10px;
     margin:5px;
     float:left;
+}
+
+.thumbnail {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  background-color: #444333;
+  overflow: hidden;
+}
+
+.thumbnail img {
+  width: 150px;
+  height: 150px;
+}
+
+.appListCard:hover img{
+    opacity: .5;
 }
 
 .appName {
