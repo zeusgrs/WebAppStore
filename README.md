@@ -4,7 +4,7 @@
 
 Το Project είναι ανοικτού κώδικα και διαθέσιμο κάτω από την άδεια GPL μέσω του GITHUB
 
-Θέμα: Application Store για Mobile συσκευές Android, Windows Phone, iPhone κτλ (βλέπε Play Store)
+Θέμα: Application Store για Mobile συσκευές Android, Windows Phone, iPhone κτλ (βλέπε Play Store)\n
 Γλώσσες υλοποίησής: PHP, Mysql και ότι άλλο χρειαστεί για το Web υλοποίηση
 και Android – Java για την mobile έκδοση για συσκευές Android.
 
