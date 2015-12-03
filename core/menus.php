@@ -6,11 +6,11 @@ class Menus {
     public function Main() {
         echo "<div class='mainMenu'>";
         echo "<ul>";
-        $this->mainMenuItem("Games","http://webtouch.gr");
-        $this->mainMenuItem("Tools");
-        $this->mainMenuItem("Music");
-        $this->mainMenuItem("Photos");
-        $this->mainMenuItem("Internet");
+        $this->mainMenuItem("Games","index.php");
+        $this->mainMenuItem("Tools","index.php");
+        $this->mainMenuItem("Music","index.php");
+        $this->mainMenuItem("Photos","index.php");
+        $this->mainMenuItem("Internet","index.php");
         echo "</ul>";
         echo "</div>";
     }
