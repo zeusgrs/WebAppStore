@@ -1,12 +1,9 @@
 <?php
 class AppList {
     /**
-     * 
-     * @param type $name = name of the app
-     * @param type $developer = developer name of this app
-     * @param type $image = image for app list
-     * @param type $stars = rate stars number 0-5
-     * @param type $link = link of app
+     * Load application card from database
+     * TODO
+     * Changes all custom value with app id to load from database
      */
     public function singleAppCard($name=null,$developer=null,$image=null,$stars=0,$link=null){
         echo "<div class='appListCard'>";
@@ -18,6 +15,11 @@ class AppList {
         echo "</div>";        
     }
     
+    /**
+     * Load application page from database
+     * TODO
+     * Changes all custom value with app id to load from database
+     */
     public function fullAppPage() {
     
         echo "<div class='appContent'>";
