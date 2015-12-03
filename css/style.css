@@ -1,15 +1,17 @@
 body {
     margin: 0px;
+    background-color: lightgray;
 }
 
 
 /* Menus */
 .mainMenu{
-    position:fixed;
+    position:relative;
     width:200px;
     height:200px;
     margin:0px;
     background-color: lightgray;
+    float:left;
 }
 
 .mainMenu ul {
@@ -81,4 +83,79 @@ body {
 
 .mainMenu #internet .mtitle:hover {
     background-color: #039cd2;
+}
+
+
+/* Apps List */
+
+.appsList {
+    position:relative;
+    left:20px;
+    width: calc(100% - 230px);
+    float:left;
+}
+
+.appListCard{
+    background-color: #fff;
+    width: 150px;
+    height: 230px;
+    padding: 10px;
+    margin:5px;
+    float:left;
+}
+
+.appName {
+    width:150px;
+    margin: 5px;
+    white-space: nowrap;
+    overflow:hidden !important;
+    text-overflow: ellipsis;
+    color:red;
+}
+
+.devName {
+    width:150px;
+    margin: 5px;
+    white-space: nowrap;
+    overflow:hidden !important;
+    text-overflow: ellipsis;
+    color:blue;    
+}
+
+.downloadIcon{
+    margin:0px;
+    width:25px;
+    height: 18px;
+    margin: 5px;
+    background-image: url('../images/icons/icon_download.png');
+    background-repeat: no-repeat;
+    float:left;
+}
+
+.appStars{
+    width:100px;
+    height: 25px;
+    margin: 5px;
+    background-repeat: no-repeat;
+    float:left;
+}
+
+.app5Stars{
+    background-image: url('../images/icons/5stars.png');
+}
+
+.app4Stars{
+    background-image: url('../images/icons/4stars.png');
+}
+
+.app3Stars{
+    background-image: url('../images/icons/3stars.png');
+}
+
+.app2Stars{
+    background-image: url('../images/icons/2stars.png');
+}
+
+.app1Stars{
+    background-image: url('../images/icons/1stars.png');
 }
