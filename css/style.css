@@ -285,3 +285,21 @@ a:hover{
     position: relative;
     left:50px;
 }
+
+.appMedia {
+    position: relative;
+    padding-top:20px;
+}
+
+.appMedia img{
+    height:300px;
+    margin-right: 10px;
+    border-radius: 10px;
+    border: 1px solid #999;      
+    float:left;
+}
+
+.appDescription{
+    width:50%;
+    font-size: 120%;
+}
