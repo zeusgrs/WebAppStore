@@ -21,14 +21,28 @@ $HtmlPage->BodyStart();
 
 $Menus->Main();
 
-echo "<div class='appsList'>";
+$appid = $_GET["appid"];
 
-while($i < 20){
-    $AppList->singleAppCard("Webtouch Voip Client","Webtouch.gr","images/app/webtouchvoipclient.jpg",5,"#");
-    $i++;
+if($appid == null){
+    echo "<div class='appsList'>";
+    $stars = 5;
+    while($i < 20){
+        if($stars < 0){$stars = 5;}
+        $AppList->singleAppCard("Webtouch Voip Client","Webtouch.gr","images/app/webtouchvoipclient.jpg",$stars,"?appid=1");
+        $i++;
+        $stars--;
+    }
+    echo "</div>";
+} else {
+    
+    echo "<div class='appContent'>";
+
+    echo "hello world";
+    
+    echo "</div>";
+    
+    
 }
-echo "</div>";
-
 $HtmlPage->BodyEnd();
 
 

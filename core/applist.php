@@ -12,7 +12,7 @@ class AppList {
         echo "<div class='appListCard'>";
         echo "<a href='$link'><div class='thumbnail'><img src='$image'></div>";
         echo "<div class='appName'>$name</div></a>";
-        echo "<div class='devName'>$developer</div>";
+        echo "<a href='#developer=$developer'><div class='devName'>$developer</div></a>";
         echo "<a href='$link'><div class='appStars app".$stars."Stars'></div>";
         echo "<div class='downloadIcon'></div></a>";
         echo "</div>";        

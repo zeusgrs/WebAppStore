@@ -7,6 +7,12 @@ a:link{
     text-decoration: none;
 }
 
+a:hover{
+    text-decoration: underline;
+    -moz-text-decoration-color: #888; /* Code for Firefox */
+    text-decoration-color: #888;    
+}
+
 /* Menus */
 .mainMenu{
     position:relative;
@@ -105,6 +111,7 @@ a:link{
     padding: 10px;
     margin:5px;
     float:left;
+    border-radius: 10px;
 }
 
 .thumbnail {
@@ -112,6 +119,8 @@ a:link{
   width: 150px;
   height: 150px;
   background-color: #444333;
+  border-radius: 10px;
+  border: 1px solid #999;
   overflow: hidden;
 }
 
@@ -130,7 +139,7 @@ a:link{
     white-space: nowrap;
     overflow:hidden !important;
     text-overflow: ellipsis;
-    color:red;
+    color:#111;
 }
 
 .devName {
@@ -139,7 +148,7 @@ a:link{
     white-space: nowrap;
     overflow:hidden !important;
     text-overflow: ellipsis;
-    color:blue;    
+    color:#888;
 }
 
 .downloadIcon{
@@ -178,4 +187,20 @@ a:link{
 
 .app1Stars{
     background-image: url('../images/icons/1stars.png');
+}
+
+.app0Stars{
+    background-image: url('../images/icons/0stars.png');
+}
+
+/* app Content */
+
+.appContent {
+    position:relative;
+    border-radius: 10px;
+    width: calc(100% - 300px);
+    background-color: #fff;
+    left:20px;
+    float:left;
+    padding:30px;
 }
