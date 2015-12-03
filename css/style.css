@@ -13,6 +13,17 @@ a:hover{
     text-decoration-color: #888;    
 }
 
+.clear {
+    clear: both;
+}
+
+.clearLeft {
+    clear: left;
+}
+
+.clearRight {
+    clear: right;
+}
 /* Menus */
 .mainMenu{
     position:relative;
@@ -118,7 +129,6 @@ a:hover{
   position: relative;
   width: 150px;
   height: 150px;
-  background-color: #444333;
   border-radius: 10px;
   border: 1px solid #999;
   overflow: hidden;
@@ -203,4 +213,75 @@ a:hover{
     left:20px;
     float:left;
     padding:30px;
+}
+
+.appHeadPhoto {
+  position: relative;
+  width: 315px;
+  height: 315px;
+  padding-right: 30px;
+  overflow: hidden;
+  float: left;
+}
+
+.appHeadPhoto img {
+  border-radius: 10px;
+  border: 1px solid #999;    
+  width: 312px;
+  height: 312px;
+}
+
+.appTitle {
+    
+}
+
+.appDeveloper {
+    position: relative;
+    top:-20px;
+    font-size: 120%;
+}
+
+.appDate {
+    position: relative;
+    font-size: 120%;
+}
+
+.appCategory {
+    position: relative;
+    font-size: 120%;
+}
+
+.appRate {
+    position: relative;
+    top:5px;
+    font-size: 120%;
+    float:left;
+}
+
+.appUsers{
+    position: relative;
+    top:5px;
+    margin-bottom: 5px;
+    font-size: 120%;
+}
+
+
+.appDownloads{
+    position: relative;
+    top:-15px;
+    font-size: 120%;
+}
+
+.downloadIconBig{
+    width:150px;
+    height: 110px;
+    margin: 5px;
+    background-image: url('../images/icons/icon_download_big.png');
+    background-repeat: no-repeat;
+    float:left;
+}
+
+#appQRcode{
+    position: relative;
+    left:50px;
 }
