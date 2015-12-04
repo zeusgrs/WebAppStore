@@ -4,6 +4,8 @@ Apktool is licensed under the Apache 2.0 License - see the LICENSE file for more
 
 How to use under WebAppStore Project
 
+first from all read this page http://ibotpeaches.github.io/Apktool/install/
+
 make this file executable chmod 755
 -------------------------------------
 chmod 755 apktool
