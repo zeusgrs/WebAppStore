@@ -11,6 +11,7 @@ class Menus {
         $this->mainMenuItem("Music","index.php");
         $this->mainMenuItem("Photos","index.php");
         $this->mainMenuItem("Internet","index.php");
+        $this->mainMenuItem("Add APK","developer.php");
         echo "</ul>";
         echo "</div>";
     }

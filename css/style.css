@@ -303,3 +303,21 @@ a:hover{
     max-width: 800px;
     font-size: 120%;
 }
+
+/* upload APK form */
+#submitApk{
+    
+}
+
+#submitApk input {
+    width:350px;
+    font-size: 18px;
+    padding: 5px;
+}
+
+#submitApk textarea {
+    width:350px;
+    height:100px;
+    font-size: 18px;
+    padding: 5px;
+}
