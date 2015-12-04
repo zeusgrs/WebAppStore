@@ -8,6 +8,7 @@ class UploadFiles {
     public function Image($image) {
         if(isset($_FILES[$image])){
           $errors = "";
+          $maxsize = (1*1024)*1024; //1 mb
           $file_name = $_FILES[$image]['name'];
           $file_size =$_FILES[$image]['size'];
           $file_tmp =$_FILES[$image]['tmp_name'];
@@ -20,8 +21,8 @@ class UploadFiles {
              $errors .= "extension not allowed, please choose a JPEG or PNG file.</br>";
           }
 
-          if($file_size > 2097152){
-             $errors .= 'File size must be excately 2 MB</br>';
+          if($file_size > $maxsize){
+             $errors .= 'File size must be excately 1 MB</br>';
           }
 
           if($errors == NULL){
@@ -37,6 +38,7 @@ class UploadFiles {
     public function Apk() {
         if(isset($_FILES['apk'])){
           $errors = "";
+          $maxsize = (500*1024)*1024; // 500 mb
           $file_name = $_FILES['apk']['name'];
           $file_size =$_FILES['apk']['size'];
           $file_tmp =$_FILES['apk']['tmp_name'];
@@ -49,8 +51,8 @@ class UploadFiles {
              $errors .= "extension not allowed, please choose a APK.<br/>";
           }
 
-          if($file_size > 2097152){
-             $errors .= 'File size must be excately 2 MB<br/>';
+          if($file_size > $maxsize){
+             $errors .= 'File size must be excately 500 MB<br/>';
           }
 
           if($errors == NULL){
