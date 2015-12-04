@@ -31,17 +31,28 @@ echo "<div class='appContent'>";
 echo "<form method='POST' action='' id='submitApk' enctype='multipart/form-data'>";
 echo "<input type='text' name='app_name' placeholder='Write your app name'><br/>";
 echo "<textarea name='app_description' placeholder='Write your app description'></textarea><br/>";
-echo "<input type='file' name='image1' id='image'><br/>";
-echo "<input type='file' name='image2' id='image'><br/>";
-echo "<input type='file' name='image3' id='image'><br/>";
-echo "<input type='submit' name='submit' value='Upload Image' /><br/>";
+echo "App APK: <input type='file' name='apk'><br/>";
+echo "App Icon: <input type='file' name='icon'><br/>";
+echo "ScreenShot 1: <input type='file' name='image1'><br/>";
+echo "ScreenShot 2: <input type='file' name='image2'><br/>";
+echo "ScreenShot 3: <input type='file' name='image3'><br/>";
+echo "ScreenShot 4: <input type='file' name='image4'><br/>";
+echo "<input type='submit' name='submit' value='Upload App' /><br/>";
 echo "</form>";
 
 foreach ($_FILES as $key => $value){
-    $Upload->Image($key);
+    if (strpos($key,"icon") !== false || strpos($key,"image") !== false){
+        if($value["size"] > 0){
+            $Upload->Image($key);
+        }
+    }
+    
+    if (strpos($key,"apk") !== false){
+        if($value["size"] > 0){
+            $Upload->Apk($key);
+        }
+    }    
 }
-
-
 
 echo "</div>";
 
