@@ -7,7 +7,7 @@ class UploadFiles {
      */
     public function Image($image) {
         if(isset($_FILES[$image])){
-          $errors= array();
+          $errors= "";
           $file_name = $_FILES[$image]['name'];
           $file_size =$_FILES[$image]['size'];
           $file_tmp =$_FILES[$image]['tmp_name'];
@@ -17,19 +17,19 @@ class UploadFiles {
           $expensions= array("jpeg","jpg","png");
 
           if(in_array($file_ext,$expensions)=== false){
-             $errors[]="extension not allowed, please choose a JPEG or PNG file.";
+             $errors .="extension not allowed, please choose a JPEG or PNG file.</br>";
           }
 
           if($file_size > 2097152){
-             $errors[]='File size must be excately 2 MB';
+             $errors .='File size must be excately 2 MB</br>';
           }
 
           if(empty($errors)==true){
              move_uploaded_file($file_tmp,"images/tmp/".$file_name);
-             echo "Success";
+             echo "$file_name Success upload </br>";
           }
           else{
-             print_r($errors);
+             echo $errors;
           }
         }        
     }
