@@ -74,6 +74,10 @@ a:hover{
     background-color: #039cd2;
 }
 
+.mainMenu .unset {
+    background-color: #909090;
+}
+
 .mainMenu .mtitle {
     position: relative;
     width: 140px;
@@ -105,6 +109,9 @@ a:hover{
     background-color: #039cd2;
 }
 
+.mainMenu #unset .mtitle:hover {
+    background-color: #909090;
+}
 
 /* Apps List */
 
@@ -272,13 +279,16 @@ a:hover{
     font-size: 120%;
 }
 
-.downloadIconBig{
+.downloadIconBig {
+    position: relative;
     width:150px;
     height: 110px;
     margin: 5px;
     background-image: url('../images/icons/icon_download_big.png');
     background-repeat: no-repeat;
+    cursor: pointer;
     float:left;
+    z-index: 10;
 }
 
 #appQRcode{
@@ -305,19 +315,29 @@ a:hover{
 }
 
 /* upload APK form */
-#submitApk{
-    
+.uploadForms{
+
 }
 
-#submitApk input {
+.uploadForms input,textarea {
     width:350px;
+    padding: 5px;
+}
+
+.uploadForms select,option,submit,input[type=submit],input[type=button]{
+    width:370px;
     font-size: 18px;
     padding: 5px;
 }
 
-#submitApk textarea {
-    width:350px;
+.uploadForms textarea {
     height:100px;
+}
+
+
+/* for delete in future */
+input[type=button]{
+    width:370px;
     font-size: 18px;
     padding: 5px;
 }

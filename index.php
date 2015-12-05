@@ -1,9 +1,13 @@
 <?php
+error_reporting(-1);
+ini_set('display_errors', 'On');
+
+if(!session_start()){ session_start(); }
+
 include_once 'core/pages.php';
 include_once 'core/databases.php';
 include_once 'core/menus.php';
 include_once 'core/applist.php';
-include_once 'core/qrcode.php';
 
 $HtmlPage = new HtmlPage();
 $Database = new Database();
@@ -24,11 +28,16 @@ $HtmlPage->BodyStart();
 
 $Menus->Main();
 
-$appid = $_GET["appid"];
+if(isset($_GET["appid"])){
+    $appid = $_GET["appid"];
+} else {
+    $appid = NULL;
+}
 
 if($appid == null){
     echo "<div class='appsList'>";
     $stars = 5;
+    $i = 0;
     while($i < 20){
         if($stars < 0){$stars = 5;}
         $AppList->singleAppCard("Webtouch Voip Client","Webtouch.gr","images/app/webtouchvoipclient.jpg",$stars,"?appid=1");
@@ -37,7 +46,7 @@ if($appid == null){
     }
     echo "</div>";
 } else {
-    $AppList->fullAppPage();
+    $AppList->fullAppPage($appid);
 }
 $HtmlPage->BodyEnd();
 

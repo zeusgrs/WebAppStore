@@ -6,14 +6,15 @@ class UploadFiles {
      * 
      */
     public function Image($image) {
-        if(isset($_FILES[$image])){
+        if(isset($image)){
           $errors = "";
           $maxsize = (1*1024)*1024; //1 mb
-          $file_name = $_FILES[$image]['name'];
-          $file_size =$_FILES[$image]['size'];
-          $file_tmp =$_FILES[$image]['tmp_name'];
-          $file_type=$_FILES[$image]['type'];
-          $file_ext=strtolower(end(explode('.',$_FILES[$image]['name'])));
+          $file_name = $image['name'];
+          $file_size = $image['size'];
+          $file_tmp = $image['tmp_name'];
+          $file_type= $image['type'];
+          $imageNameArray = explode('.',$image['name']);
+          $file_ext = strtolower(end($imageNameArray));
 
           $expensions= array("jpeg","jpg","png");
 
@@ -28,6 +29,7 @@ class UploadFiles {
           if($errors == NULL){
              move_uploaded_file($file_tmp,"images/tmp/".$file_name);
              echo "$file_name Success upload </br>";
+             return "images/tmp/".$file_name;
           }
           else{
              echo $errors;
@@ -35,15 +37,16 @@ class UploadFiles {
         }        
     }
     
-    public function Apk() {
-        if(isset($_FILES['apk'])){
+    public function Apk($apk) {
+        if(isset($apk)){
           $errors = "";
           $maxsize = (500*1024)*1024; // 500 mb
-          $file_name = $_FILES['apk']['name'];
-          $file_size =$_FILES['apk']['size'];
-          $file_tmp =$_FILES['apk']['tmp_name'];
-          $file_type=$_FILES['apk']['type'];
-          $file_ext=strtolower(end(explode('.',$_FILES['apk']['name'])));
+          $file_name = $apk['name'];
+          $file_size = $apk['size'];
+          $file_tmp = $apk['tmp_name'];
+          $file_type = $apk['type'];
+          $apkNameArray = explode('.',$apk['name']);
+          $file_ext = strtolower(end($apkNameArray));
 
           $expensions= array("apk");
 
@@ -58,6 +61,7 @@ class UploadFiles {
           if($errors == NULL){
              move_uploaded_file($file_tmp,"apk/tmp/".$file_name);
              echo "$file_name Success upload<br/>";
+             return "apk/tmp/".$file_name;
           }
           else{
              echo $errors;

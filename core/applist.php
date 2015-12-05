@@ -20,8 +20,28 @@ class AppList {
      * TODO
      * Changes all custom value with app id to load from database
      */
-    public function fullAppPage() {
-    
+    public function fullAppPage($app_id) {
+        $app_id = $_SESSION["app_id"];
+        
+        $Databases = new Database();
+        $db = $Databases->Open();
+        
+        $query = mysqli_query($db,"SELECT apps.name as name,
+                                          apps.date as date,
+                                          categorys.name as category,
+                                          developer.name as developer,
+                                          apps.description as description,
+                                          apps.downloads as downloads,
+                                          apps.apk as apk
+                                   FROM apps,categorys,developer
+                                   WHERE apps.app_id = $app_id
+                                     AND apps.dev = developer.dev_id
+                                     AND apps.category = categorys.cat_id
+                ");
+        $app = mysqli_fetch_assoc($query);
+        
+        $apkUrl = "http://".$_SERVER['SERVER_NAME']."/prog/WebAppStore/".$app["apk"];
+        
         echo "<div class='appContent'>";
 
         echo "<div class='appHead'>";
@@ -30,28 +50,28 @@ class AppList {
             echo "</div>";
 
             echo "<div class='appTitle'>";
-            echo "<h1>Webtouch Voip Client</h1>";
+            echo "<h1>".$app["name"]."</h1>";
             echo "</div>";
 
             echo "<div class='appDeveloper'>";
-            echo "Webtouch.gr";
+            echo $app["developer"];
             echo "</div>";        
 
             echo "<div class='appDate'>";
-            echo "Date: 03 December 2015";
+            echo "Date: ".$app["date"];
             echo "</div>";  
 
             echo "<div class='appCategory'>";
-            echo "Category: Communication";
+            echo "Category: ".$app["category"];
             echo "</div>"; 
 
             echo "<div class='appRate'>Rate:</div><div class='appStars app5Stars'></div> <div class='appUsers'>( 25.534 )</div><br>"; 
 
             echo "<div class='appDownloads'>";
-            echo "Downloads: 152.352";
+            echo "Downloads: ".$app["downloads"];
             echo "</div>"; 
 
-            echo "<div class='downloadIconBig'></div>"; 
+            echo "<a href='$apkUrl'><div class='downloadIconBig'></div></a>"; 
 
             echo "<div id='appQRcode'></div>";        
 
@@ -60,7 +80,7 @@ class AppList {
         echo "<div class='clear'></div>";
 
         echo "<div class='appMedia'>";
-        $title = "Webtouch Voip Client";
+        $title = $app["name"];
         $img1 = "images/app/webtouch_voip_client_1.jpeg";
         echo "<a href='$img1' data-lightbox='app-set' title='$title'><img src='$img1'></a>";
         $img2 = "images/app/webtouch_voip_client_2.jpeg";
@@ -71,14 +91,13 @@ class AppList {
 
         echo "<div class='appDescription'>";
         echo "<h2>Description</h2></br>";
-        echo "Για να συνδεθείτε στο πρόγραμμα θα πρέπει πρώτα να δημιουργήσετε έναν δωρεάν λογαριασμό χρήστη εδώ http://webtouch.gr/?page_id=2102 και να αποκτήσετε δωρεάν κλήσεις περίπου 10 λεπτών.<br/>
-    WEBTouch VOIP Client είναι μια voip εφαρμογή για Android , η οποία υποστηρίζει ένα ευρύ φάσμα υπηρεσιών VoIP. Απλά συνδεθείτε χρησιμοποιώντας τον υπάρχοντα λογαριασμό σας και αρχίστε να εξοικονομείτε χρήματα για εθνικές και διεθνείς κλήσεις , όπου και να είστε , όποτε θέλετε!<br/>
-    Για να ξεκινήσετε την εξοικονόμηση για κλήσεις κινητής τηλεφωνίας , εγκαταστήστε το δωρεάν WEBTouch VOIP Client από το Google Play. Εάν δεν έχετε ακόμα λογαριασμό , κάντε εγγραφή στην ιστοσελίδα της Webtouch , πιστώστε στον λογαριασμό σας λίγα ευρώ και ξεκινήστε να μιλάτε με τις χαμηλότερες τιμές τις αγοράς Το μόνο που χρειάζεται είναι η εφαρμογή και μία 3G ή WiFi σύνδεση.";
+        echo $app["description"];
         echo "</div>";
 
         echo "</div>";
-
-        echo "<script>jQuery('#appQRcode').qrcode({width: 110,height: 110,text: 'http://www.webtouch.gr'});</script>";        
+        
+        
+        echo "<script>jQuery('#appQRcode').qrcode({width: 110,height: 110,text: '$apkUrl'});</script>";        
     }
 }
 

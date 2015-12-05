@@ -4,28 +4,33 @@ class Menus {
      * create global main menu
      */
     public function Main() {
+        $Databases = new Database();
+        $db = $Databases->Open();
         echo "<div class='mainMenu'>";
         echo "<ul>";
-        $this->mainMenuItem("Games","index.php");
-        $this->mainMenuItem("Tools","index.php");
-        $this->mainMenuItem("Music","index.php");
-        $this->mainMenuItem("Photos","index.php");
-        $this->mainMenuItem("Internet","index.php");
-        $this->mainMenuItem("Add APK","developer.php");
+        
+        $query = mysqli_query($db,"SELECT * FROM `categorys` ORDER BY `order`");
+        
+        while($categorys = mysqli_fetch_array($query)){
+            $this->mainMenuItem($categorys["name"], strtolower($categorys["name"]),"index.php?cat=".$categorys["name"]);
+        }
+        $this->mainMenuItem("Add APK","unset","developer.php");
         echo "</ul>";
         echo "</div>";
+        $Databases->close($db);
     }
     
     /**
      * $name convert to lowercase char for using good in icon , css
      * @param type $name = name of menu item
+     * @param type $class = name of css class for colors
      * @param type $url = url link for menu item
      */
-    function mainMenuItem($name,$url="#"){
+    function mainMenuItem($name,$class,$url="#"){
         echo "<a href='$url'>
-                <li id='".strtolower($name)."'>
-                    <div class='icon ".strtolower($name)."'>";
-        $image = "images/icons/icon_".strtolower($name).".png";
+                <li id='$class'>
+                    <div class='icon $class'>";
+        $image = "images/icons/icon_$class.png";
         if(file_exists($image)){
             echo "<img src='$image' width='25px'>";
         }
