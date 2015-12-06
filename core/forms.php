@@ -72,7 +72,12 @@ class Forms {
     
     public function UploadImages() {
         echo "<form method='POST' action='' id='submitScreenshot' enctype='multipart/form-data' class='uploadForms'>";
-        echo "<h2>".$_SESSION["app_name"]."</h2>";
+        if(isset($_SESSION["app_name"])){
+            $app_name = $_SESSION["app_name"];
+        } else {
+            $app_name = NULL;
+        }
+        echo "<h2>".$app_name."</h2>";
         echo "<h2>Upload Media Files</h2>";
         echo "App Icon: <input type='file' name='icon' required><br/>";
         echo "ScreenShot 1: <input type='file' name='image1' required><br/>";

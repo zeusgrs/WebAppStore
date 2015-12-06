@@ -1,18 +1,60 @@
 <?php
 class AppList {
+    
+    public function AllAppList($app_category){
+        $Databases = new Database();
+        $db = $Databases->Open();
+        
+        /* Select Application list from database */
+        $app_query = mysqli_query($db,"SELECT   apps.app_id
+                                        FROM    apps,categorys
+                                       WHERE    categorys.name = '$app_category'
+                                         AND    apps.category = categorys.cat_id");
+        echo mysqli_error($db);
+        while($app = mysqli_fetch_array($app_query)){
+            $this->SingleAppCard($app["app_id"]);
+        }
+        
+    }
+    
     /**
      * Load application card from database
      * TODO
      * Changes all custom value with app id to load from database
      */
-    public function singleAppCard($name=null,$developer=null,$image=null,$stars=0,$link=null){
+    public function SingleAppCard($app_id){
+        $Databases = new Database();
+        $Media = new Plugins();
+        
+        $db = $Databases->Open();
+        
+        /* Select Application info from database */
+        $app_query = mysqli_query($db,"SELECT   apps.app_id as app_id,
+                                                apps.name as name,
+                                                developer.name as developer
+                                        FROM    apps,developer
+                                       WHERE    apps.app_id = $app_id
+                                         AND    apps.dev = developer.dev_id");
+        
+        $app = mysqli_fetch_assoc($app_query);
+        echo mysqli_error($db);
+        /* Select Application media from database images, icons, video*/
+        $media_query = mysqli_query($db,"SELECT     app_id, type, name, description, url, date
+                                           FROM     media
+                                          WHERE     app_id = $app_id
+                                            AND     active = 1
+                                            AND     type = 'icon'");
+        $icon = mysqli_fetch_assoc($media_query);
+        
         echo "<div class='appListCard'>";
-        echo "<a href='$link'><div class='thumbnail'><img src='$image'></div>";
-        echo "<div class='appName'>$name</div></a>";
-        echo "<a href='#developer=$developer'><div class='devName'>$developer</div></a>";
-        echo "<a href='$link'><div class='appStars app".$stars."Stars'></div>";
+        echo "<a href='index.php?app_id=".$app["app_id"]."'><div class='thumbnail'><img src='".$icon["url"]."'></div>";
+        echo "<div class='appName'>".$app["name"]."</div></a>";
+        echo "<a href='#developer=".$app["developer"]."'><div class='devName'>".$app["developer"]."</div></a>";
+        $stars = 5;
+        echo "<a href='index.php?app_id=".$app["app_id"]."'><div class='appStars app".$stars."Stars'></div>";
         echo "<div class='downloadIcon'></div></a>";
-        echo "</div>";        
+        echo "</div>";
+        $Databases->Close($db);
     }
     
     /**
@@ -20,33 +62,68 @@ class AppList {
      * TODO
      * Changes all custom value with app id to load from database
      */
-    public function fullAppPage($app_id) {
-        $app_id = $_SESSION["app_id"];
+    public function FullAppPage($app_id) {
+        if(isset($_SESSION["app_id"])){
+            $app_id = $_SESSION["app_id"];
+        }
+        
         
         $Databases = new Database();
+        $Media = new Plugins();
+        
         $db = $Databases->Open();
         
-        $query = mysqli_query($db,"SELECT apps.name as name,
-                                          apps.date as date,
-                                          categorys.name as category,
-                                          developer.name as developer,
-                                          apps.description as description,
-                                          apps.downloads as downloads,
-                                          apps.apk as apk
-                                   FROM apps,categorys,developer
-                                   WHERE apps.app_id = $app_id
-                                     AND apps.dev = developer.dev_id
-                                     AND apps.category = categorys.cat_id
-                ");
-        $app = mysqli_fetch_assoc($query);
+        /* Select Application info from database */
+        $app_query = mysqli_query($db,"SELECT   apps.name as name,
+                                                apps.date as date,
+                                                categorys.name as category,
+                                                developer.name as developer,
+                                                apps.description as description,
+                                                apps.downloads as downloads,
+                                                apps.apk as apk
+                                        FROM    apps,categorys,developer
+                                       WHERE    apps.app_id = $app_id
+                                         AND    apps.dev = developer.dev_id
+                                         AND    apps.category = categorys.cat_id ");
         
-        $apkUrl = "http://".$_SERVER['SERVER_NAME']."/prog/WebAppStore/".$app["apk"];
+        $app = mysqli_fetch_assoc($app_query);
+        
+        /* Select Application media from database images, icons, video*/
+        $media_query = mysqli_query($db,"SELECT     app_id, type, name, description, url, date
+                                           FROM     media
+                                          WHERE     app_id = $app_id
+                                            AND     active = 1
+                                       ORDER BY     'order' ");
+        
+        while($media = mysqli_fetch_assoc($media_query)){
+            if($media["type"] == "icon"){
+                /* only one icon per app exist */
+                $icon = $media["url"];
+            }
+            if($media["type"] == "screenshot"){
+                $screenshot[] = array("url" => $media["url"],
+                                     "name" => $media["name"],
+                              "description" => $media["description"]);
+            }
+            if($media["type"] == "video"){
+                $video[] = array("url" => $media["url"],
+                                "name" => $media["name"],
+                         "description" => $media["description"]);
+            }            
+        }
+        
+        /* Make apk full url to work in customs server folder */
+        $url =  explode("/",$_SERVER["REQUEST_URI"]);
+        $url = end($url);
+        $url = str_replace($url, '', $_SERVER["REQUEST_URI"]);
+        
+        $apkUrl = "http://".$_SERVER["HTTP_HOST"].$url.$app["apk"];
         
         echo "<div class='appContent'>";
 
         echo "<div class='appHead'>";
             echo "<div class='appHeadPhoto'>";
-            echo "<img src='images/app/webtouchvoipclient.jpg' width='312px'>";
+            echo "<img src='$icon' width='312px'>";
             echo "</div>";
 
             echo "<div class='appTitle'>";
@@ -80,11 +157,21 @@ class AppList {
         echo "<div class='clear'></div>";
 
         echo "<div class='appMedia'>";
-        $title = $app["name"];
-        $img1 = "images/app/webtouch_voip_client_1.jpeg";
-        echo "<a href='$img1' data-lightbox='app-set' title='$title'><img src='$img1'></a>";
-        $img2 = "images/app/webtouch_voip_client_2.jpeg";
-        echo "<a href='$img2' data-lightbox='app-set' title='$title'><img src='$img2'></a>";
+        
+        foreach ($video as $key => $value){
+            echo $Media->YoutubeFullLink($value["url"]);
+        } 
+        
+        foreach ($screenshot as $key => $value){
+            /* if name and descripton in database is NULL the title = application name */
+            if($value["name"] != NULL || $value["description"] != NULL){
+                $title = $value["name"]." ".$value["description"];
+            } else {
+                $title = $app["name"];
+            }
+            echo $Media->ImageLightbox($value["url"], $width=0, $height=300,$title,"app-set");
+        }
+        
         echo "</div>";    
 
         echo "<div class='clear'></div>";
@@ -97,7 +184,8 @@ class AppList {
         echo "</div>";
         
         
-        echo "<script>jQuery('#appQRcode').qrcode({width: 110,height: 110,text: '$apkUrl'});</script>";        
+        echo "<script>jQuery('#appQRcode').qrcode({width: 110,height: 110,text: '$apkUrl'});</script>";
+        $Databases->Close($db);
     }
 }
 

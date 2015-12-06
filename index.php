@@ -8,11 +8,13 @@ include_once 'core/pages.php';
 include_once 'core/databases.php';
 include_once 'core/menus.php';
 include_once 'core/applist.php';
+include_once 'core/plugins.php';
 
 $HtmlPage = new HtmlPage();
 $Database = new Database();
 $Menus = new Menus();
 $AppList = new AppList();
+$Plugin = new Plugins();
 
 $HtmlPage->HeadStart("WebAppStore ver 0.1");
 
@@ -28,26 +30,39 @@ $HtmlPage->BodyStart();
 
 $Menus->Main();
 
-if(isset($_GET["appid"])){
-    $appid = $_GET["appid"];
+if(isset($_GET["app_id"])){
+    $app_id = $_GET["app_id"];
 } else {
-    $appid = NULL;
+    $app_id = NULL;
 }
 
-if($appid == null){
+if(isset($_GET["cat"])){
+    $cat = $_GET["cat"];
+} else {
+    $cat = NULL;
+}
+
+if($app_id == NULL && $cat == NULL){
     echo "<div class='appsList'>";
     $stars = 5;
     $i = 0;
     while($i < 20){
         if($stars < 0){$stars = 5;}
-        $AppList->singleAppCard("Webtouch Voip Client","Webtouch.gr","images/app/webtouchvoipclient.jpg",$stars,"?appid=1");
+        $AppList->SingleAppCard(1);
         $i++;
         $stars--;
     }
     echo "</div>";
-} else {
-    $AppList->fullAppPage($appid);
 }
+
+if($app_id != NULL){
+    $AppList->FullAppPage($app_id);
+}
+
+if($cat != NULL){
+    $AppList->AllAppList($cat);
+}
+
 $HtmlPage->BodyEnd();
 
 

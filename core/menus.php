@@ -12,9 +12,9 @@ class Menus {
         $query = mysqli_query($db,"SELECT * FROM `categorys` ORDER BY `order`");
         
         while($categorys = mysqli_fetch_array($query)){
-            $this->mainMenuItem($categorys["name"], strtolower($categorys["name"]),"index.php?cat=".$categorys["name"]);
+            $this->mainMenuItem($categorys["name"], strtolower($categorys["name"]),$categorys["icon"],"index.php?cat=".$categorys["name"]);
         }
-        $this->mainMenuItem("Add APK","unset","developer.php");
+        $this->mainMenuItem("Add APK","unset","","developer.php");
         echo "</ul>";
         echo "</div>";
         $Databases->close($db);
@@ -26,13 +26,12 @@ class Menus {
      * @param type $class = name of css class for colors
      * @param type $url = url link for menu item
      */
-    function mainMenuItem($name,$class,$url="#"){
+    function mainMenuItem($name,$class,$icon,$url="#"){
         echo "<a href='$url'>
                 <li id='$class'>
                     <div class='icon $class'>";
-        $image = "images/icons/icon_$class.png";
-        if(file_exists($image)){
-            echo "<img src='$image' width='25px'>";
+        if(file_exists($icon)){
+            echo "<img src='$icon' width='25px'>";
         }
         
         echo "      </div>
