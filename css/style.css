@@ -248,6 +248,10 @@ a:hover{
     font-size: 120%;
 }
 
+.appDeveloper a,a:link{
+    color:#303030;
+}
+
 .appDate {
     position: relative;
     font-size: 120%;
@@ -256,6 +260,10 @@ a:hover{
 .appCategory {
     position: relative;
     font-size: 120%;
+}
+
+.appCategory a,a:link{
+    color:#303030;
 }
 
 .appRate {

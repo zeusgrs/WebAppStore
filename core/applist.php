@@ -1,6 +1,9 @@
 <?php
 class AppList {
-    
+    /**
+     * load all app from a category
+     * @param type $app_category
+     */
     public function AllAppList($app_category){
         $Databases = new Database();
         $db = $Databases->Open();
@@ -10,6 +13,26 @@ class AppList {
                                         FROM    apps,categorys
                                        WHERE    categorys.name = '$app_category'
                                          AND    apps.category = categorys.cat_id");
+        echo mysqli_error($db);
+        while($app = mysqli_fetch_array($app_query)){
+            $this->SingleAppCard($app["app_id"]);
+        }
+        
+    }
+    /**
+     *  load all app as card from a developer 
+     * @param type $developer
+     */
+    
+    public function AllAppListFromDeveloper($developer){
+        $Databases = new Database();
+        $db = $Databases->Open();
+        
+        /* Select Application list from database */
+        $app_query = mysqli_query($db,"SELECT   apps.app_id
+                                        FROM    apps,developer
+                                       WHERE    developer.name = '$developer'
+                                         AND    apps.dev = developer.dev_id");
         echo mysqli_error($db);
         while($app = mysqli_fetch_array($app_query)){
             $this->SingleAppCard($app["app_id"]);
@@ -49,7 +72,7 @@ class AppList {
         echo "<div class='appListCard'>";
         echo "<a href='index.php?app_id=".$app["app_id"]."'><div class='thumbnail'><img src='".$icon["url"]."'></div>";
         echo "<div class='appName'>".$app["name"]."</div></a>";
-        echo "<a href='#developer=".$app["developer"]."'><div class='devName'>".$app["developer"]."</div></a>";
+        echo "<a href='?developer=".$app["developer"]."'><div class='devName'>".$app["developer"]."</div></a>";
         $stars = 5;
         echo "<a href='index.php?app_id=".$app["app_id"]."'><div class='appStars app".$stars."Stars'></div>";
         echo "<div class='downloadIcon'></div></a>";
@@ -131,7 +154,7 @@ class AppList {
             echo "</div>";
 
             echo "<div class='appDeveloper'>";
-            echo $app["developer"];
+            echo "<a href='?developer=".$app["developer"]."'>".$app["developer"]."</a>";
             echo "</div>";        
 
             echo "<div class='appDate'>";
@@ -139,7 +162,7 @@ class AppList {
             echo "</div>";  
 
             echo "<div class='appCategory'>";
-            echo "Category: ".$app["category"];
+            echo "Category: <a href='?cat=".$app["category"]."'>".$app["category"]."</a>";
             echo "</div>"; 
 
             echo "<div class='appRate'>Rate:</div><div class='appStars app5Stars'></div> <div class='appUsers'>( 25.534 )</div><br>"; 

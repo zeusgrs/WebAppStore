@@ -42,7 +42,13 @@ if(isset($_GET["cat"])){
     $cat = NULL;
 }
 
-if($app_id == NULL && $cat == NULL){
+if(isset($_GET["developer"])){
+    $developer = $_GET["developer"];
+} else {
+    $developer = NULL;
+}
+
+if($app_id == NULL && $cat == NULL && $developer == NULL){
     echo "<div class='appsList'>";
     $stars = 5;
     $i = 0;
@@ -61,6 +67,10 @@ if($app_id != NULL){
 
 if($cat != NULL){
     $AppList->AllAppList($cat);
+}
+
+if($developer != NULL){
+    $AppList->AllAppListFromDeveloper($developer);
 }
 
 $HtmlPage->BodyEnd();
