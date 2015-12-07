@@ -17,27 +17,18 @@ class Forms {
         
 
         if(isset($_POST["submit"]) == "Upload App"){
-            if(isset($_POST["app_name"])){
-                $app_name = $_POST["app_name"];
-            }
-            if(isset($_POST["app_dev"])){
-                $app_dev = $_POST["app_dev"];
-            }
-            if(isset($_POST["app_category"])){
-                $app_category = $_POST["app_category"];
-            }
-            if(isset($_POST["app_description"])){
-                $app_description = $_POST["app_description"];
-            }
-            if(isset($_FILES["app_apk"])){
-                $app_apk = $_FILES["app_apk"];
-            }
+            $app_name = isset( $_POST["app_name"]) ? $_POST["app_name"] : '';
+            $app_dev = isset( $_POST["app_dev"]) ? $_POST["app_dev"] : '';
+            $app_category = isset( $_POST["app_category"]) ? $_POST["app_category"] : '';
+            $app_description = isset( $_POST["app_description"]) ? $_POST["app_description"] : '';
+            $app_apk = isset( $_FILES["app_apk"]) ? $_FILES["app_apk"] : '';
+            $app_id_session = isset( $_SESSION["app_id"]) ? $_SESSION["app_id"] : '0';
 
             if (strpos($app_apk["name"],".apk") !== false){
                 if($app_apk["size"] > 0){
                     $Upload = new UploadFiles();
 
-                    if($_SESSION["app_id"] == NULL){
+                    if($app_id_session == 0){
                         $apk = $Upload->Apk($app_apk);
                     } else {
                         $apk = NULL;
@@ -51,7 +42,7 @@ class Forms {
                         $Databases = new Database();
                         $db = $Databases->Open();
 
-                        $checkIfExist = mysqli_num_rows(mysqli_query($db, "SELECT app_id FROM apps WHERE app_id = ".$_SESSION["app_id"]));
+                        $checkIfExist = mysqli_num_rows(mysqli_query($db, "SELECT app_id FROM apps WHERE app_id = $app_id_session"));
 
                         if($checkIfExist == 0){                    
                             mysqli_query($db, "INSERT INTO apps (name,description,apk,dev,category,date) 
@@ -72,15 +63,12 @@ class Forms {
     
     public function UploadImages() {
         echo "<form method='POST' action='' id='submitScreenshot' enctype='multipart/form-data' class='uploadForms'>";
-        if(isset($_SESSION["app_name"])){
-            $app_name = $_SESSION["app_name"];
-        } else {
-            $app_name = NULL;
-        }
+        $app_name = isset( $_SESSION["app_name"]) ? $_SESSION["app_name"] : '';
+
         echo "<h2>".$app_name."</h2>";
         echo "<h2>Upload Media Files</h2>";
         echo "App Icon: <input type='file' name='icon' required><br/>";
-        echo "ScreenShot 1: <input type='file' name='image1' required><br/>";
+        echo "ScreenShot 1: <input type='file' name='image1'><br/>";
         echo "ScreenShot 2: <input type='file' name='image2'><br/>";
         echo "ScreenShot 3: <input type='file' name='image3'><br/>";
         echo "ScreenShot 4: <input type='file' name='image4'><br/>";
@@ -114,7 +102,7 @@ class Forms {
             foreach ($_FILES as $key => $value){
                 if (strpos($key,"image") !== false){
                     if($value["size"] > 0){
-                        $image = $Upload->Image($value);
+                        $image = $Upload->Image($app_id,$value);
                         if($image != NULL){
                             mysqli_query($db, "INSERT INTO media (app_id,type,url,date) VALUES ($app_id,'screenshot','$image','$today')");
                         }                        
@@ -122,7 +110,16 @@ class Forms {
                 }
                 if (strpos($key,"icon") !== false){
                     if($value["size"] > 0){
-                        $image = $Upload->Image($value);
+                        /* check if another icon is exist, if exist delete old icon from files and database before add new */
+                        $oldIconQuery = mysqli_query($db, "SELECT id,url FROM media WHERE app_id = $app_id AND type = 'icon'");
+                        $oldIcon = mysqli_fetch_assoc($oldIconQuery);
+                        if(!empty($oldIcon)){
+                            unlink($oldIcon["url"]);
+                            mysqli_query($db, "DELETE FROM media WHERE id = ".$oldIcon["id"]);
+                        }
+                        
+                        $image = $Upload->Image($app_id,$value);
+                        
                         if($image != NULL){
                             mysqli_query($db, "INSERT INTO media (app_id,type,url,date) VALUES ($app_id,'icon','$image','$today')");
                         }                        

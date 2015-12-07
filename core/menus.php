@@ -10,7 +10,7 @@ class Menus {
         echo "<ul>";
         
         $query = mysqli_query($db,"SELECT * FROM `categorys` ORDER BY `order`");
-        
+        $this->mainMenuItem("Home","unset","images/icons/icon_home.png","index.php");
         while($categorys = mysqli_fetch_array($query)){
             $this->mainMenuItem($categorys["name"], strtolower($categorys["name"]),$categorys["icon"],"index.php?category=".$categorys["name"]);
         }

@@ -4,7 +4,26 @@ class AppList {
      * load all app from a category
      * @param type $app_category
      */
-    public function AllAppList($app_category){
+    public function AllAppList(){
+        $Databases = new Database();
+        $db = $Databases->Open();
+        
+        /* Select Application list from database */
+        $app_query = mysqli_query($db,"SELECT   app_id
+                                        FROM    apps
+                                       WHERE    active = 1");
+                
+        echo mysqli_error($db);
+        while($app = mysqli_fetch_array($app_query)){
+            $this->SingleAppCard($app["app_id"]);
+        }
+        
+    }
+    /**
+     * load all app from a category
+     * @param type $app_category
+     */
+    public function AllAppListFromCategory($app_category){
         $Databases = new Database();
         $db = $Databases->Open();
         
@@ -21,6 +40,7 @@ class AppList {
         }
         
     }
+    
     /**
      *  load all app as card from a developer 
      * @param type $developer
@@ -42,6 +62,8 @@ class AppList {
         }
         
     }
+    
+    
     
     /**
      * Load application card from database
@@ -99,6 +121,10 @@ class AppList {
         $Media = new Plugins();
         
         $db = $Databases->Open();
+        
+        $icon = array();
+        $screenshot = array();
+        $video = array();
         
         /* Select Application info from database */
         $app_query = mysqli_query($db,"SELECT   apps.name as name,
@@ -187,18 +213,22 @@ class AppList {
 
             echo "<div class='appMedia'>";
 
-            foreach ($video as $key => $value){
-                echo $Media->YoutubeFullLink($value["url"]);
-            } 
-
-            foreach ($screenshot as $key => $value){
-                /* if name and descripton in database is NULL the title = application name */
-                if($value["name"] != NULL || $value["description"] != NULL){
-                    $title = $value["name"]." ".$value["description"];
-                } else {
-                    $title = $app["name"];
+            if($video != NULL) {
+                foreach ($video as $key => $value){
+                    echo $Media->YoutubeFullLink($value["url"]);
+                } 
+            }
+            
+            if($screenshot != NULL){
+                foreach ($screenshot as $key => $value){
+                    /* if name and descripton in database is NULL the title = application name */
+                    if($value["name"] != NULL || $value["description"] != NULL){
+                        $title = $value["name"]." ".$value["description"];
+                    } else {
+                        $title = $app["name"];
+                    }
+                    echo $Media->ImageLightbox($value["url"], $width=0, $height=300,$title,"app-set");
                 }
-                echo $Media->ImageLightbox($value["url"], $width=0, $height=300,$title,"app-set");
             }
 
             echo "</div>";    

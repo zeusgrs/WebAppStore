@@ -37,16 +37,7 @@ $category = isset( $_GET["category"]) ? $_GET["category"] : '';
 $developer = isset( $_GET["developer"]) ? $_GET["developer"] : '';
 
 if($app_id == NULL && $category == NULL && $developer == NULL){
-    echo "<div class='appsList'>";
-    $stars = 5;
-    $i = 0;
-    while($i < 20){
-        if($stars < 0){$stars = 5;}
-        $AppList->SingleAppCard(1);
-        $i++;
-        $stars--;
-    }
-    echo "</div>";
+    $AppList->AllAppList();
 }
 
 if($app_id != NULL){
@@ -54,7 +45,7 @@ if($app_id != NULL){
 }
 
 if($category != NULL){
-    $AppList->AllAppList($category);
+    $AppList->AllAppListFromCategory($category);
 }
 
 if($developer != NULL){

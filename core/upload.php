@@ -5,7 +5,7 @@ class UploadFiles {
      * @param type $image set the POST image name to upload
      * 
      */
-    public function Image($image) {
+    public function Image($app_id,$image) {
         if(isset($image)){
           $errors = "";
           $maxsize = (1*1024)*1024; //1 mb
@@ -27,9 +27,9 @@ class UploadFiles {
           }
 
           if($errors == NULL){
-             move_uploaded_file($file_tmp,"images/tmp/".$file_name);
+             move_uploaded_file($file_tmp,"images/tmp/".$app_id."_".$file_name);
              echo "$file_name Success upload </br>";
-             return "images/tmp/".$file_name;
+             return "images/tmp/".$app_id."_".$file_name;
           }
           else{
              echo $errors;

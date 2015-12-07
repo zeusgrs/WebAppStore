@@ -44,8 +44,12 @@ if($step == NULL){
 } elseif($step == 2) {
     $Forms->UploadImages();
     echo "<a href='developer.php?step=3'><input type='button' name='step' value='Next Step'></a>";
-} else {
-    
+} elseif($step == 3 && $_SESSION["app_id"] != NULL) {
+    echo "<a href='index.php?app_id=".$_SESSION["app_id"]."'><input type='button' name='step' value='Finish'></a>";
+    session_unset();
+    session_destroy();
+    $_SESSION = array();
+    session_regenerate_id();
 }
 
 echo "</div>";
