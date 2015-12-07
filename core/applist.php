@@ -11,7 +11,8 @@ class AppList {
         /* Select Application list from database */
         $app_query = mysqli_query($db,"SELECT   app_id
                                         FROM    apps
-                                       WHERE    active = 1");
+                                       WHERE    active = 1
+                                    ORDER BY    date DESC,app_id DESC");
                 
         echo mysqli_error($db);
         while($app = mysqli_fetch_array($app_query)){
@@ -32,7 +33,8 @@ class AppList {
                                         FROM    apps,categorys
                                        WHERE    categorys.name = '$app_category'
                                          AND    apps.category = categorys.cat_id
-                                         AND    apps.active = 1");
+                                         AND    apps.active = 1
+                                    ORDER BY    apps.date DESC,apps.app_id DESC");
                 
         echo mysqli_error($db);
         while($app = mysqli_fetch_array($app_query)){
@@ -55,7 +57,8 @@ class AppList {
                                         FROM    apps,developer
                                        WHERE    developer.name = '$developer'
                                          AND    apps.dev = developer.dev_id
-                                         AND    apps.active = 1");
+                                         AND    apps.active = 1
+                                    ORDER BY    apps.date DESC,apps.app_id DESC");
         
         while($app = mysqli_fetch_array($app_query)){
             $this->SingleAppCard($app["app_id"]);
