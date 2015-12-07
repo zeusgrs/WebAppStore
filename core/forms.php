@@ -106,7 +106,9 @@ class Forms {
                         
                         $image = $Upload->Image($app_id,$value);                        
                         
-                        /* check if another screenshot with same name exist, if exist delete old screenshot from files and database before add new */
+                        /* check if another screenshot with same name exist, if exist delete old screenshot from database before add new
+                         * image replace with new by default
+                         */
                         $oldScreenshotQuery = mysqli_query($db, "SELECT id,url FROM media WHERE app_id = $app_id AND type = 'screenshot' AND url='$image'");
                         $oldScreenshot = mysqli_fetch_assoc($oldScreenshotQuery);
                         if(!empty($oldScreenshot)){
