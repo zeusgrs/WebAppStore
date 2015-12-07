@@ -12,7 +12,7 @@ class Menus {
         $query = mysqli_query($db,"SELECT * FROM `categorys` ORDER BY `order`");
         
         while($categorys = mysqli_fetch_array($query)){
-            $this->mainMenuItem($categorys["name"], strtolower($categorys["name"]),$categorys["icon"],"index.php?cat=".$categorys["name"]);
+            $this->mainMenuItem($categorys["name"], strtolower($categorys["name"]),$categorys["icon"],"index.php?category=".$categorys["name"]);
         }
         $this->mainMenuItem("Add APK","unset","","developer.php");
         echo "</ul>";

@@ -144,6 +144,5 @@ class Forms {
         }
         $Databases->Close($db);
     }
-    
 }
 

@@ -9,12 +9,14 @@ include_once 'core/databases.php';
 include_once 'core/menus.php';
 include_once 'core/applist.php';
 include_once 'core/plugins.php';
+include_once 'core/forms.php';
 
 $HtmlPage = new HtmlPage();
 $Database = new Database();
 $Menus = new Menus();
 $AppList = new AppList();
 $Plugin = new Plugins();
+$Var = new Forms();
 
 $HtmlPage->HeadStart("WebAppStore ver 0.1");
 
@@ -30,25 +32,11 @@ $HtmlPage->BodyStart();
 
 $Menus->Main();
 
-if(isset($_GET["app_id"])){
-    $app_id = $_GET["app_id"];
-} else {
-    $app_id = NULL;
-}
+$app_id = isset( $_GET["app_id"]) ? $_GET["app_id"] : '';
+$category = isset( $_GET["category"]) ? $_GET["category"] : '';
+$developer = isset( $_GET["developer"]) ? $_GET["developer"] : '';
 
-if(isset($_GET["cat"])){
-    $cat = $_GET["cat"];
-} else {
-    $cat = NULL;
-}
-
-if(isset($_GET["developer"])){
-    $developer = $_GET["developer"];
-} else {
-    $developer = NULL;
-}
-
-if($app_id == NULL && $cat == NULL && $developer == NULL){
+if($app_id == NULL && $category == NULL && $developer == NULL){
     echo "<div class='appsList'>";
     $stars = 5;
     $i = 0;
@@ -65,8 +53,8 @@ if($app_id != NULL){
     $AppList->FullAppPage($app_id);
 }
 
-if($cat != NULL){
-    $AppList->AllAppList($cat);
+if($category != NULL){
+    $AppList->AllAppList($category);
 }
 
 if($developer != NULL){

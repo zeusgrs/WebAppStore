@@ -35,11 +35,8 @@ $Menus->Main();
 
 echo "<div class='appContent'>";
 
-if(isset($_GET["step"])){
-    $step = $_GET["step"];
-} else {
-    $step = NULL;
-}
+$step = isset($_GET["step"]) ? $_GET["step"] : '';
+
 
 if($step == NULL){
     $Forms->UploadApk();
