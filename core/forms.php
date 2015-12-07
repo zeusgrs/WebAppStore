@@ -77,6 +77,7 @@ class Forms {
         echo "<input type='submit' name='submit' value='Upload Media' /><br/>";
         echo "</form>";
         
+        echo "<div class='uploadResults'>";
         if(isset($_POST["submit"]) == "Upload Media"){
             $app_id = $_SESSION["app_id"];
             
@@ -102,7 +103,16 @@ class Forms {
             foreach ($_FILES as $key => $value){
                 if (strpos($key,"image") !== false){
                     if($value["size"] > 0){
-                        $image = $Upload->Image($app_id,$value);
+                        
+                        $image = $Upload->Image($app_id,$value);                        
+                        
+                        /* check if another screenshot with same name exist, if exist delete old screenshot from files and database before add new */
+                        $oldScreenshotQuery = mysqli_query($db, "SELECT id,url FROM media WHERE app_id = $app_id AND type = 'screenshot' AND url='$image'");
+                        $oldScreenshot = mysqli_fetch_assoc($oldScreenshotQuery);
+                        if(!empty($oldScreenshot)){
+                            mysqli_query($db, "DELETE FROM media WHERE id = ".$oldScreenshot["id"]);
+                        }
+                        
                         if($image != NULL){
                             mysqli_query($db, "INSERT INTO media (app_id,type,url,date) VALUES ($app_id,'screenshot','$image','$today')");
                         }                        
@@ -128,6 +138,8 @@ class Forms {
                 $image = NULL;
             }
         }
+        echo "</div>";
+        echo "<div class='clear'></div>";
     }
     
     public function MakeCategorys(){

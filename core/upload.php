@@ -27,9 +27,10 @@ class UploadFiles {
           }
 
           if($errors == NULL){
-             move_uploaded_file($file_tmp,"images/tmp/".$app_id."_".$file_name);
-             echo "$file_name Success upload </br>";
-             return "images/tmp/".$app_id."_".$file_name;
+             $imageUrl = "images/tmp/".$app_id."_".$file_name;
+             move_uploaded_file($file_tmp,$imageUrl);
+             echo "<div class='uploadSuccess'><img src='$imageUrl'><br/>Success upload</div>";
+             return $imageUrl;
           }
           else{
              echo $errors;

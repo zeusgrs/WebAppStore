@@ -357,6 +357,21 @@ a:hover{
     height:100px;
 }
 
+/* upload images */
+.uploadResults{
+    position: relative;
+    width: 90%;
+}
+
+.uploadSuccess{
+    position: relative;
+    padding-right: 20px;
+    float:left;
+}
+
+.uploadSuccess img{
+    height: 80px;
+}
 
 /* for delete in future */
 input[type=button]{
