@@ -36,7 +36,7 @@ Marketing άτομα με ιδέες για προώθηση , κατασκευ�
 
 Ελπίζω να μαζευτούμε άτομα με όρεξη για να κάνουμε κάτι καλό και δωρεάν για τον κόσμο.
 
-Screenshots : https://github.com/zeusgrs/WebAppStore/wiki
+Screenshots : https://github.com/zeusgrs/WebAppStore/wiki/Screenshots
 
 Φιλικά
 Παντελής Καπλάνογλου.
